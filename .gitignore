@@ -13,3 +13,7 @@ bower_components
 psd
 thumb
 sketch
+
+.vscode
+.parcel-cache
+dist
