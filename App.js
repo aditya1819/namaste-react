@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-const heading = React.createElement("h1", {}, "Helllo")
+// React.createElement() => Object => ReactDOM Element => (render) => HTML Element
 
-const root = ReactDOM.createRoot(document.getElementById("root"))
+// JSX
 
-root.render(heading)
+const jsxHeading = <h1>Hello from JSX</h1>
+
+const root = ReactDOM.createRoot()
