@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "This repo holds the code, assgms, note from Namaste react Course",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "npx parcel index.html"
   },
   "repository": {
     "type": "git",
