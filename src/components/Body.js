@@ -8,7 +8,7 @@ const Body = () => {
       <div className="search">Search Bar here</div>
       <div className="hotel-container">
         {mock.map((item) => {
-          return <HotelCard data={item.info} />;
+          return <HotelCard key={item.info.id} data={item.info} />;
         })}
       </div>
     </div>
