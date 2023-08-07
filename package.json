@@ -4,7 +4,9 @@
   "description": "This repo holds the code, assgms, note from Namaste react Course",
   "scripts": {
     "test": "jest",
-    "start": "npx parcel index.html"
+    "start": "concurrently \"npm run build:json-server\" \"npm run start:parcel\"",
+    "build:json-server": "node mock/server/json-server.js",
+    "start:parcel": "npx parcel index.html"
   },
   "repository": {
     "type": "git",
@@ -17,10 +19,12 @@
   },
   "homepage": "https://github.com/aditya1819/namaste-react#readme",
   "devDependencies": {
+    "concurrently": "^8.2.0",
     "parcel": "^2.9.3",
     "process": "^0.11.10"
   },
   "dependencies": {
+    "json-server": "^0.17.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
