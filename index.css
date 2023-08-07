@@ -88,7 +88,8 @@
   background-color: rgb(169, 178, 190);
 }
 
-.hotel-container {
+.hotel-container,
+.shimmer-container {
   margin-left: 60px;
   margin-right: 60px;
   display: flex;
@@ -110,6 +111,14 @@
   margin-bottom: 25px;
   overflow: hidden;
   white-space: normal;
+}
+
+.shimmer-card {
+  width: 250px;
+  height: 300px;
+  margin-left: 40px;
+  margin-bottom: 25px;
+  background-color: rgb(221, 221, 221);
 }
 
 .hotel-card:hover {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import HotelCard from './HotelCard';
+import HotelContainer from './HotelContainer';
 
 const Body = () => {
   const [hotelList, setHotelList] = useState([]);
@@ -67,11 +67,8 @@ const Body = () => {
         </div>
         <div className="hotel-count">{hotelList.length} Hotels found</div>
       </div>
-      <div className="hotel-container">
-        {hotelList.map((item) => {
-          return <HotelCard key={item.info.id} data={item.info} />;
-        })}
-      </div>
+
+      <HotelContainer hotelList={hotelList} />
     </div>
   );
 };
