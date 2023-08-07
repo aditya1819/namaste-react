@@ -127,3 +127,16 @@
   font-family: sans-serif;
   padding-left: 5px;
 }
+
+.hotel-count {
+  font-size: 16px;
+  margin-left: 30px;
+  padding: 10px;
+  width: fit-content;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(193, 193, 193);
+  color: rgb(62, 62, 62);
+  border-radius: 25px;
+}
