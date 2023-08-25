@@ -1,0 +1,8 @@
+- dont use html anchor tag while using react
+- as it refreshers entire page content
+
+- instead use Link Component from React
+
+Types of routing:
+1. Server side routing
+2. Client side routing
