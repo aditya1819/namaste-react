@@ -1,6 +1,6 @@
 const jsonServer = require('json-server');
 const mock = require('../data/mockhotels.json');
-const { readFile } = require('fs');
+const { readFileSync } = require('fs');
 const path = require('path');
 
 const server = jsonServer.create();
@@ -35,65 +35,56 @@ server.get('/hotel/:id', async (req, res) => {
   const id = req.params.id;
   console.log(id);
 
-  let data;
-
   let _path = __dirname.split('\\').slice(0, 4);
   _path = path.join(..._path, 'data', 'hoteldata', id);
   console.log(_path);
 
-  // Read the JSON file
-  readFile(_path + '.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return;
-    }
+  let data = await readFileSync(_path + '.json', 'utf8');
 
-    try {
-      // Parse the JSON data
-      data = JSON.parse(data);
-      let info = data.data.cards[0].card.card.info;
+  try {
+    // Parse the JSON data
+    data = JSON.parse(data);
+    let info = data.data.cards[0].card.card.info;
 
-      info = {
-        id: info.id,
-        name: info.name,
-        city: info.city,
-        cloudinaryImageId: info.cloudinaryImageId,
-        areaName: info.areaName,
-        cost: info.costForTwoMessage,
-        cuisines: info.cuisines,
-        avgRating: info.avgRating,
-        veg: info.veg,
-        feesDetails: info.feesDetails,
-        sla: {
-          deliveryTime: info.sla.deliveryTime
-        }
-      };
+    info = {
+      id: info.id,
+      name: info.name,
+      city: info.city,
+      cloudinaryImageId: info.cloudinaryImageId,
+      areaName: info.areaName,
+      cost: info.costForTwoMessage,
+      cuisines: info.cuisines,
+      avgRating: info.avgRating,
+      veg: info.veg,
+      feesDetails: info.feesDetails,
+      sla: {
+        deliveryTime: info.sla.deliveryTime
+      }
+    };
 
-      let foodOptionsByCategory =
-        data.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards;
+    let foodOptionsByCategory =
+      data.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards;
 
-      foodOptionsByCategory = foodOptionsByCategory.slice(1);
+    foodOptionsByCategory = foodOptionsByCategory.slice(1);
 
-      // add category in data object instead of key
-      const foodOptions = [];
+    // add category in data object instead of key
+    const foodOptions = [];
 
-      foodOptionsByCategory.forEach((foodOption) => {
-        let items = foodOption.card.card.itemCards;
-        if (items) {
-          items = items.map((item) => {
-            return { ...item, category: foodOption.card.card.title };
-          });
+    foodOptionsByCategory.forEach((foodOption) => {
+      let items = foodOption.card.card.itemCards;
+      if (items) {
+        items = items.map((item) => {
+          return { ...item, category: foodOption.card.card.title };
+        });
 
-          foodOptions.push(...items);
-        }
-      });
+        foodOptions.push(...items);
+      }
+    });
 
-      data = { info, foodOptions };
-      console.log(data);
-    } catch (error) {
-      console.error('Error parsing JSON:', error);
-    }
-  });
+    data = { info, foodOptions };
+  } catch (error) {
+    console.error('Error parsing JSON:', error);
+  }
 
   res.json(data);
 });
