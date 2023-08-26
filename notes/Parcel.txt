@@ -1,0 +1,24 @@
+Parcel to bundle our code
+
+npx parcel index.html to start
+
+Yes react makes app fast, but in background many modules like parcel are used to make app fast and optimize it
+
+Benefits:
+
+- Dev Build and local server
+- HMT Hot module replacement (*)
+- File watcing algorithm written in C++
+- Caching for faster builds
+- Image Optimization
+- Minification (for production)
+- Bundling
+- Compress
+- Consistent hashing (*)
+- Code splitting
+- Differential bundling - support old browsers
+- Diagnostic
+- Error handling
+- HTTPs
+- Tree shaking - remove unused code
+- Different Dev and Prod build

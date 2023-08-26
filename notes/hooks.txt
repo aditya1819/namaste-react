@@ -1,0 +1,6 @@
+Hooks:
+- Hooks are react utility functions
+- 2 most used hooks:
+  - useState()
+  - useEffect()
+- Whenever a state value changes, react rerenders the component
