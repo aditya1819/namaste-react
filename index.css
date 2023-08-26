@@ -113,6 +113,10 @@
   white-space: normal;
 }
 
+.hotel-card:link {
+  text-decoration: none;
+}
+
 .shimmer-card {
   width: 250px;
   height: 300px;
