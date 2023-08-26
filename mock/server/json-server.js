@@ -33,15 +33,16 @@ server.get('/hotels', (req, res) => {
 
 server.get('/hotel/:id', async (req, res) => {
   const id = req.params.id;
-  console.log(id);
 
+  console.log(`Fetching data for hotel: ${id}`);
+  
   let _path = __dirname.split('\\').slice(0, 4);
   _path = path.join(..._path, 'data', 'hoteldata', id);
-  console.log(_path);
 
-  let data = await readFileSync(_path + '.json', 'utf8');
-
+  let data = [];
   try {
+    data = await readFileSync(_path + '.json', 'utf8');
+
     // Parse the JSON data
     data = JSON.parse(data);
     let info = data.data.cards[0].card.card.info;
@@ -68,7 +69,8 @@ server.get('/hotel/:id', async (req, res) => {
     foodOptionsByCategory = foodOptionsByCategory.slice(1);
 
     // add category in data object instead of key
-    const foodOptions = [];
+    let foodOptions = [];
+    const foodIds = new Set();
 
     foodOptionsByCategory.forEach((foodOption) => {
       let items = foodOption.card.card.itemCards;
@@ -81,9 +83,17 @@ server.get('/hotel/:id', async (req, res) => {
       }
     });
 
+    foodOptions = foodOptions.filter((item) => {
+      if (!foodIds.has(item.card.info.id)) {
+        foodIds.add(item.card.info.id);
+        return true;
+      }
+      return false;
+    });
+
     data = { info, foodOptions };
   } catch (error) {
-    console.error('Error parsing JSON:', error);
+    console.error('Error while getting data:', error);
   }
 
   res.json(data);

@@ -1,6 +1,7 @@
 import React from 'react';
 import HotelCard from './HotelCard';
 import ShimmerCard from './ShimmerCard';
+import { Link } from 'react-router-dom';
 
 const HotelContainer = (props) => {
   const { hotelList } = props;
@@ -12,7 +13,11 @@ const HotelContainer = (props) => {
   return (
     <div className="hotel-container">
       {hotelList.map((item) => {
-        return <HotelCard key={item.info.id} data={item.info} />;
+        return (
+          <Link key={item.info.id} to={'hotels/' + item.info.id}>
+            <HotelCard data={item.info} />
+          </Link>
+        );
       })}
     </div>
   );

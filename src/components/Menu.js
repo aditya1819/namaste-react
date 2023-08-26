@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import ShimmerCard from './ShimmerCard';
+import { useParams } from 'react-router-dom';
 
 const Menu = () => {
   const [hotelDetails, setHotelDetails] = useState(null);
+
+  // to access the dynamic param value of the route
+  const { id } = useParams();
 
   useEffect(() => {
     fetchMenu();
   }, []);
 
   const fetchMenu = async () => {
-    let data = await fetch(`http://localhost:3000/hotel/68938`);
-    console.log(typeof data);
+    let data = await fetch(`http://localhost:3000/hotel/${id}`);
     const jsonData = await data.json();
     setHotelDetails(jsonData);
   };
