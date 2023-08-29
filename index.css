@@ -153,3 +153,7 @@
   color: rgb(62, 62, 62);
   border-radius: 25px;
 }
+
+.about-us-user-cards {
+  border: 1px solid #000000;
+}
