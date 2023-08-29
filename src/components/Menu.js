@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ShimmerCard from './ShimmerCard';
 import { useParams } from 'react-router-dom';
+import useMenu from '../utils/hooks/useMenu';
 
 const Menu = () => {
-  const [hotelDetails, setHotelDetails] = useState(null);
-
   // to access the dynamic param value of the route
   const { id } = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    let data = await fetch(`http://localhost:3000/hotel/${id}`);
-    const jsonData = await data.json();
-    setHotelDetails(jsonData);
-  };
+  // added custom hook to fetch menu based on id
+  const hotelDetails = useMenu(id);
 
   if (hotelDetails === null) {
     return <ShimmerCard />;
