@@ -1,6 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import constants from '../utils/constants';
+import useOnlineStatus from '../utils/hooks/useOnlineStatus';
 
 const Header = () => {
   return (
@@ -11,13 +12,16 @@ const Header = () => {
 
       <div className="navbar">
         <ul>
+          <li>Online Status: {useOnlineStatus() ? '🟢' : '🔴'}</li>
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/about">About Us</Link>
           </li>
-
+          <li>
+            <Link to="/grocery">Grocery</Link>
+          </li>
           <li>
             <Link to="/contact">Contact Us</Link>
           </li>

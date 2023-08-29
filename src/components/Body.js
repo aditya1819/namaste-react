@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HotelContainer from './HotelContainer';
+import useOnlineStatus from '../utils/hooks/useOnlineStatus';
 
 const Body = () => {
   const [hotelList, setHotelList] = useState([]);
@@ -41,6 +42,12 @@ const Body = () => {
       setHotelList([]);
     }
   };
+
+  if (!useOnlineStatus()) {
+    return (
+      <h1>Looks like there is some issue with your internet connection</h1>
+    );
+  }
 
   return (
     <div className="body">
