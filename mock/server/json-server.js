@@ -23,7 +23,8 @@ server.get('/hotels', (req, res) => {
               avgRating: item.info.avgRating,
               cuisines: item.info.cuisines,
               sla: item.info.sla,
-              cloudinaryImageId: item.info.cloudinaryImageId
+              cloudinaryImageId: item.info.cloudinaryImageId,
+              offerLabel: item.info.aggregatedDiscountInfoV3.header ?? ''
             }
           };
         })
@@ -35,7 +36,7 @@ server.get('/hotel/:id', async (req, res) => {
   const id = req.params.id;
 
   console.log(`Fetching data for hotel: ${id}`);
-  
+
   let _path = __dirname.split('\\').slice(0, 4);
   _path = path.join(..._path, 'data', 'hoteldata', id);
 
