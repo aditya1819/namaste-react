@@ -2,6 +2,7 @@ import React from 'react';
 import ShimmerCard from './ShimmerCard';
 import { useParams } from 'react-router-dom';
 import useMenu from '../utils/hooks/useMenu';
+import MenuCategory from './MenuCategory';
 
 const Menu = () => {
   // to access the dynamic param value of the route
@@ -27,23 +28,25 @@ const Menu = () => {
 
   const { foodOptions: itemCards } = hotelDetails ?? [];
 
+  const categories = new Set([
+    ...itemCards.map((item) => item.category ?? 'none')
+  ]);
+
   return (
-    <div className="menu">
-      <h1>{name}</h1>
+    <div className="text-center">
+      <div className="font-bold my-8 text-3xl">{name}</div>
 
-      <h3>{cuisines.join(', ')}</h3>
-      <h3>{cost}</h3>
+      <div className="text-xl font-medium text-gray-600">
+        {cuisines.join(', ')}
+        <h3>{cost}</h3>
+      </div>
 
-      <h2>Menu</h2>
-
-      <ul>
-        {itemCards.map((item) => (
-          <li key={item.card.info.id}>
-            {item.card.info.name} -{' '}
-            {item.card.info.price / 100 || item.card.info.defaultPrice / 100} Rs
-          </li>
-        ))}
-      </ul>
+      {[...categories].map((category) => (
+        <MenuCategory
+          data={category}
+          items={itemCards.filter((item) => item.category === category)}
+        />
+      ))}
     </div>
   );
 };
