@@ -1,0 +1,27 @@
+1. Uses js class that extents React.Component
+2. Props will be received in constructor
+3. Render method that will be return a JSX
+4. When a component instance is created the constructor will be called just like in case of js  class
+5. The Render phase includes: executing of constructor and render method
+6. Then comes commit phase in which Component lifecycle methods will be executed and DOM and refs will be updated
+7. As updating of DOMs and Refs is expensive process, React will batch the DOM manipulation for the child components
+(to optimise performance)
+
+Eg. If a parent component calls a 2 child component then the lifecycle flow will be:
+
+- Parent Constructor
+- Parent Render
+
+  - 1st child constructor
+  - 1st child render
+
+  - 2nd child constructor
+  - 2nd child render
+
+  # DOM Updated in a single batch
+  - 1st child component did mount
+  - 2nd child component did mount
+
+- Parent component did mount
+
+Ref. diagrams of component lifecycle
