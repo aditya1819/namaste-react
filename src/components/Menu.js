@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ShimmerCard from './ShimmerCard';
 import { useParams } from 'react-router-dom';
 import useMenu from '../utils/hooks/useMenu';
@@ -10,6 +10,9 @@ const Menu = () => {
 
   // added custom hook to fetch menu based on id
   const hotelDetails = useMenu(id);
+
+  // index of elements from category array
+  const [showIndex, setShowIndex] = useState(0);
 
   if (hotelDetails === null) {
     return <ShimmerCard />;
@@ -41,10 +44,16 @@ const Menu = () => {
         <h3>{cost}</h3>
       </div>
 
-      {[...categories].map((category) => (
+      {[...categories].map((category, index) => (
         <MenuCategory
+          key={category}
           data={category}
           items={itemCards.filter((item) => item.category === category)}
+          // parent component controlling states of the child
+          // passing on set function is an example of state lifting
+          showItems={showIndex === index ? true : false}
+          setShowIndex={() => setShowIndex(index)}
+          setShowIndexNull={() => setShowIndex(null)}
         />
       ))}
     </div>

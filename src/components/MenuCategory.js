@@ -2,12 +2,19 @@ import React, { useState } from 'react';
 import MenuItemList from './MenuItemList';
 
 const MenuCategory = (props) => {
-  const { data, items } = props;
+  const {
+    data,
+    items,
+    showItems,
+    setShowIndex,
 
-  const [showItems, setShowItems] = useState(false);
+    // to set index to null - in case of collapse
+    setShowIndexNull
+  } = props;
 
   const handleClick = () => {
-    showItems ? setShowItems(false) : setShowItems(true);
+    // to expand and collapse based on showItems value and onclick event
+    showItems ? setShowIndexNull() : setShowIndex();
   };
 
   return (
