@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import constants from '../utils/constants';
 import useOnlineStatus from '../utils/hooks/useOnlineStatus';
+import UserContext from '../utils/context/User';
 
 const Header = () => {
+  const data = useContext(UserContext);
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -12,7 +15,9 @@ const Header = () => {
 
       <div className="navbar">
         <ul>
-          <li>Online Status: {useOnlineStatus() ? '🟢' : '🔴'}</li>
+          <li>
+            {data.loggedInUser}'s Status: {useOnlineStatus() ? '🟢' : '🔴'}
+          </li>
           <li>
             <Link to="/">Home</Link>
           </li>

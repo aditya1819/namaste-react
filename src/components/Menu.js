@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ShimmerCard from './ShimmerCard';
 import { useParams } from 'react-router-dom';
 import useMenu from '../utils/hooks/useMenu';
 import MenuCategory from './MenuCategory';
+import UserContext from '../utils/context/User';
 
 const Menu = () => {
   // to access the dynamic param value of the route
@@ -14,6 +15,9 @@ const Menu = () => {
   // index of elements from category array
   const [showIndex, setShowIndex] = useState(0);
 
+  const data = useContext(UserContext);
+
+  console.log(data.loggedInUser);
   if (hotelDetails === null) {
     return <ShimmerCard />;
   }
@@ -42,6 +46,10 @@ const Menu = () => {
       <div className="text-xl font-medium text-gray-600">
         {cuisines.join(', ')}
         <h3>{cost}</h3>
+      </div>
+
+      <div className="text-xl py-3 font-medium text-gray-900">
+        <span>Hi {data.loggedInUser}, special discounts for you!</span>
       </div>
 
       {[...categories].map((category, index) => (
