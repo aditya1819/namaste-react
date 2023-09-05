@@ -33,7 +33,7 @@ const AppLayout = () => {
     };
 
     setUserInfo(data.name);
-  });
+  }, []);
 
   return (
     <UserContext.Provider value={{ loggedInUser: 'Dummy Name' }}>
@@ -41,7 +41,7 @@ const AppLayout = () => {
         <Header />
 
         {/* different context data for different components */}
-        <UserContext.Provider value={{ loggedInUser: userInfo }}>
+        <UserContext.Provider value={{ loggedInUser: userInfo, setUserInfo }}>
           {/* while rendering the component corresponding to route will overrider the outlet in HTML */}
           <Outlet />
         </UserContext.Provider>

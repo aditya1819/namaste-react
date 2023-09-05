@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import HotelContainer from './HotelContainer';
 import useOnlineStatus from '../utils/hooks/useOnlineStatus';
+import UserContext from '../utils/context/User';
 
 const Body = () => {
   const [hotelList, setHotelList] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   let hotelData;
+
+  const { setUserInfo, loggedInUser } = useContext(UserContext);
 
   const filterHotelHandler = () => {
     const newHotelList = hotelList.filter((item) => {
@@ -73,6 +76,15 @@ const Body = () => {
           Clear Filter 🗙
         </div>
         <div className="hotel-count">{hotelList.length} Hotels found</div>
+
+        <div className="username-bar">
+          <input
+            id="username-input"
+            type="text"
+            value={loggedInUser}
+            onChange={(e) => setUserInfo(e.target.value)}
+          />
+        </div>
       </div>
 
       <HotelContainer hotelList={hotelList} />

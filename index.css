@@ -82,7 +82,8 @@
   color: white;
 }
 
-.search-bar {
+.search-bar,
+.username-bar {
   font-size: 16px;
   margin-left: 30px;
   padding: 10px;
