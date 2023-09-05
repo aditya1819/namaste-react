@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import Body from './components/Body';
@@ -6,6 +6,7 @@ import About from './components/About';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Error from './components/Error';
 import Menu from './components/Menu';
+import UserContext from './utils/context/User';
 
 // Chunking | code spliting | Dynamic bundling | lazy loading | on demand loading
 
@@ -22,13 +23,30 @@ const Grocery = lazy(() => import('./components/Grocery'));
 // these modules will be fetched in client browser when that component is loaded
 
 const AppLayout = () => {
-  return (
-    <div className="AppLayout">
-      <Header />
+  const [userInfo, setUserInfo] = useState();
 
-      {/* while rendering the component corresponding to route will overrider the outlet in HTML */}
-      <Outlet />
-    </div>
+  useEffect(() => {
+    // make API call to fetch user data
+
+    const data = {
+      name: 'aditya shahare'
+    };
+
+    setUserInfo(data.name);
+  }, []);
+
+  return (
+    <UserContext.Provider value={{ loggedInUser: 'Dummy Name' }}>
+      <div className="AppLayout">
+        <Header />
+
+        {/* different context data for different components */}
+        <UserContext.Provider value={{ loggedInUser: userInfo, setUserInfo }}>
+          {/* while rendering the component corresponding to route will overrider the outlet in HTML */}
+          <Outlet />
+        </UserContext.Provider>
+      </div>
+    </UserContext.Provider>
   );
 };
 

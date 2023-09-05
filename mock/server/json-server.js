@@ -2,6 +2,7 @@ const jsonServer = require('json-server');
 const mock = require('../data/mockhotels.json');
 const { readFileSync } = require('fs');
 const path = require('path');
+const { isBooleanObject } = require('util/types');
 
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
@@ -23,7 +24,8 @@ server.get('/hotels', (req, res) => {
               avgRating: item.info.avgRating,
               cuisines: item.info.cuisines,
               sla: item.info.sla,
-              cloudinaryImageId: item.info.cloudinaryImageId
+              cloudinaryImageId: item.info.cloudinaryImageId,
+              offerLabel: item.info.aggregatedDiscountInfoV3.header ?? ''
             }
           };
         })
@@ -34,8 +36,10 @@ server.get('/hotels', (req, res) => {
 server.get('/hotel/:id', async (req, res) => {
   const id = req.params.id;
 
+  const sortByCategory = req.query.sortByCategory ?? false;
+
   console.log(`Fetching data for hotel: ${id}`);
-  
+
   let _path = __dirname.split('\\').slice(0, 4);
   _path = path.join(..._path, 'data', 'hoteldata', id);
 
