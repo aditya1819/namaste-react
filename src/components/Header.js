@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 import constants from '../utils/constants';
 import useOnlineStatus from '../utils/hooks/useOnlineStatus';
 import UserContext from '../utils/context/User';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const data = useContext(UserContext);
+
+  // subscribing to store using selector
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems)
 
   return (
     <div className="header">
@@ -31,7 +36,7 @@ const Header = () => {
             <Link to="/contact">Contact Us</Link>
           </li>
           <li>
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">Cart - {cartItems.length} Items</Link>
           </li>
         </ul>
       </div>

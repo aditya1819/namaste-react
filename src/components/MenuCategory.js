@@ -32,7 +32,7 @@ const MenuCategory = (props) => {
         </div>
 
         {/* body */}
-        {showItems && <MenuItemList items={items} />}
+        {showItems && <MenuItemList items={items} isMenuPage />}
       </div>
     </div>
   );
