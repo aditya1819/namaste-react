@@ -18,13 +18,15 @@ class About extends Component {
 
     return (
       <div>
-        <h1> About us page</h1>
-        <div className="about-us-user-cards">
-          <div>
+        <div className="w-6/12 mx-auto p-4 my-4 text-center">
+          <div className="text-xl font-medium">About Us</div>
+          
+          {/* Code to read context data */}
+          {/* <div>
             <UserContext.Consumer>
               {({ loggedInUser }) => <h1>{loggedInUser}</h1>}
             </UserContext.Consumer>
-          </div>
+          </div> */}
           <UserClass name={UserContext.loggedInUser} />
         </div>
       </div>

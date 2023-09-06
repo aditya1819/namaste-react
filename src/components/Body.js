@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import HotelContainer from './HotelContainer';
 import useOnlineStatus from '../utils/hooks/useOnlineStatus';
-import UserContext from '../utils/context/User';
 
 const Body = () => {
   const [hotelList, setHotelList] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   let hotelData;
-
-  const { setUserInfo, loggedInUser } = useContext(UserContext);
 
   const filterHotelHandler = () => {
     const newHotelList = hotelList.filter((item) => {
@@ -54,9 +51,10 @@ const Body = () => {
 
   return (
     <div className="body">
-      <div className="btns">
-        <div className="search-bar">
+      <div className="w-6/12 flex ml-10 my-10 justify-between">
+        <div>
           <input
+            className="border-solid border-2 border-sky-500 p-2"
             id="search-input"
             type="text"
             placeholder="Search..."
@@ -65,29 +63,45 @@ const Body = () => {
           />
         </div>
 
-        <div className="search-btn" onClick={filterBySearchQuery}>
+        <button
+          className=" bg-blue-500 text-white rounded-lg p-2"
+          onClick={filterBySearchQuery}
+        >
           Search 🔍
-        </div>
+        </button>
 
-        <div className="filter-btn" onClick={filterHotelHandler}>
+        <button
+          className=" bg-green-700 text-white rounded-lg p-2"
+          onClick={filterHotelHandler}
+        >
           Top Rated ⭐
-        </div>
-        <div className="clear-filter-btn" onClick={clearFilterHandler}>
-          Clear Filter 🗙
-        </div>
-        <div className="hotel-count">{hotelList.length} Hotels found</div>
+        </button>
 
-        <div className="username-bar">
+        <button
+          className=" bg-sky-800 text-white rounded-lg p-2"
+          onClick={clearFilterHandler}
+        >
+          Clear Filter 🗙
+        </button>
+
+        <label className=" bg-gray-500 bg-opacity-30 text-slate-600 rounded-lg p-2">
+          {hotelList.length} Hotels found
+        </label>
+      </div>
+
+      {/* Here is the code to update context values on the go */}
+      {/* <div className="username-bar">
           <input
             id="username-input"
             type="text"
             value={loggedInUser}
             onChange={(e) => setUserInfo(e.target.value)}
           />
-        </div>
-      </div>
+        </div> */}
 
-      <HotelContainer hotelList={hotelList} />
+      <div className="w-10/12 mx-auto p-4 my-4">
+        <HotelContainer hotelList={hotelList} />
+      </div>
     </div>
   );
 };

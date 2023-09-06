@@ -19,7 +19,7 @@ const MenuCategory = (props) => {
 
   return (
     <div>
-      <div className="w-6/12 mx-auto shadow-lg bg-gray-50 p-4 my-4 ">
+      <div className="w-6/12 mx-auto shadow-lg bg-gray-50 p-4 my-4">
         {/* header */}
         <div
           className="flex justify-between cursor-pointer"
