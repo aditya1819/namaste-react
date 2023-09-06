@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Grocery = () => {
-  return <h1>Buy Grocery at best prices</h1>;
+  return (
+    <div className="text-center m-4 p-4 font-bold text-2xl">
+      ⚒️ Coming soon! 🏗️
+    </div>
+  );
 };
 
 export default Grocery;

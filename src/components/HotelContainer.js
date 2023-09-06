@@ -13,7 +13,7 @@ const HotelContainer = (props) => {
   const HotelCardOffer = withOfferLable(HotelCard);
 
   return (
-    <div className="hotel-container">
+    <div className="flex flex-wrap">
       {hotelList.map((item) => (
         <Link key={item.info.id} to={'hotels/' + item.info.id}>
           {item.info.offerLabel ? (

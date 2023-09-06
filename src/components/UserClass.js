@@ -45,8 +45,8 @@ class UserClass extends Component {
 
     return (
       <div>
-        <img src={avatar_url} />
-        <h1>{name}</h1>
+        <img src={avatar_url} className='w-40 mx-auto my-8'/>
+        <div className='text-xl my-8'>{name}</div>
         <h2>{location}</h2>
         <h2>{this.state.count}</h2>
       </div>

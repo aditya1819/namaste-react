@@ -76,7 +76,7 @@ const appRouter = createBrowserRouter([
         )
       },
       { path: '/hotels/:id', element: <Menu /> },
-      { path: '/cart', element: <Cart /> }
+      { path: '/cart', element: <Cart /> },
     ]
   }
 ]);
