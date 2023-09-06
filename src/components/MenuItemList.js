@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addItem } from '../utils/store/slice/cartSlice';
+import { addItem, removeItem } from '../utils/store/slice/cartSlice';
 
 const MenuItemList = ({ items, isMenuPage }) => {
   const dispatch = useDispatch();
@@ -10,6 +10,20 @@ const MenuItemList = ({ items, isMenuPage }) => {
 
     dispatch(addItem(item));
   };
+
+  const handleRemoveItem = (id) => {
+    dispatch(removeItem(id));
+  };
+
+  const countMap = new Map();
+
+  if (!isMenuPage) {
+    items = items.map((item) => {
+      countMap.set(item.data.card.info.id, item.count);
+
+      return item.data;
+    });
+  }
 
   return (
     <div>
@@ -45,7 +59,19 @@ const MenuItemList = ({ items, isMenuPage }) => {
                   Add +
                 </button>
               ) : (
-                <></>
+                <div className="flex">
+                  <div className="p-2 rounded-lg m-1 bg-teal-200 shadow-lg font-bold">
+                    {countMap.get(item.card.info.id)}
+                  </div>
+                  <button
+                    className="p-2 rounded-lg m-1 bg-red-100 shadow-lg"
+                    onClick={() => {
+                      handleRemoveItem(item.card.info.id);
+                    }}
+                  >
+                    🗙
+                  </button>
+                </div>
               )}
             </div>
 

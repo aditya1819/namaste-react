@@ -13,6 +13,14 @@ const Cart = () => {
     dispatch(clearCart());
   };
 
+  let totalCost = 0;
+
+  cartItems.forEach((item) => {
+    const cost =
+      item.data.card.info.price / 100 || item.data.card.info.defaultPrice / 100;
+    totalCost += cost * item.count;
+  });
+
   return (
     <div className="text-center m-4 p-4">
       <h1 className="text-2xl font-bold">Cart</h1>
@@ -27,6 +35,11 @@ const Cart = () => {
           <h1> Cart is empty. Add Items to the cart!</h1>
         )}
         <MenuItemList items={cartItems} />
+        {totalCost > 0 && (
+          <div className="text-xl font-bold text-gray-600 text-left m-2 p-2">
+            Total order cost: ₹ {totalCost}
+          </div>
+        )}
       </div>
     </div>
   );
