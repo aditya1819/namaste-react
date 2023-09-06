@@ -7,6 +7,9 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Error from './components/Error';
 import Menu from './components/Menu';
 import UserContext from './utils/context/User';
+import { Provider } from 'react-redux';
+import appStore from './utils/store/appStore';
+import Cart from './components/Cart';
 
 // Chunking | code spliting | Dynamic bundling | lazy loading | on demand loading
 
@@ -36,17 +39,19 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: 'Dummy Name' }}>
-      <div className="AppLayout">
-        <Header />
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: 'Dummy Name' }}>
+        <div className="AppLayout">
+          <Header />
 
-        {/* different context data for different components */}
-        <UserContext.Provider value={{ loggedInUser: userInfo, setUserInfo }}>
-          {/* while rendering the component corresponding to route will overrider the outlet in HTML */}
-          <Outlet />
-        </UserContext.Provider>
-      </div>
-    </UserContext.Provider>
+          {/* different context data for different components */}
+          <UserContext.Provider value={{ loggedInUser: userInfo, setUserInfo }}>
+            {/* while rendering the component corresponding to route will overrider the outlet in HTML */}
+            <Outlet />
+          </UserContext.Provider>
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -70,7 +75,8 @@ const appRouter = createBrowserRouter([
           </Suspense>
         )
       },
-      { path: '/hotels/:id', element: <Menu /> }
+      { path: '/hotels/:id', element: <Menu /> },
+      { path: '/cart', element: <Cart /> }
     ]
   }
 ]);
