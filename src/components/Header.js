@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 const Header = () => {
   // subscribing to store using selector
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
 
   return (
     <div className="border-2 border-b-gray-400">

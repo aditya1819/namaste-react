@@ -1,0 +1,24 @@
+{
+  "info": {
+    "id": "328616",
+    "name": "Veg Aroma",
+    "avgRating": 4.1,
+    "cuisines": [
+      "North Indian",
+      "South Indian",
+      "Chinese",
+      "Biryani",
+      "Maharashtrian"
+    ],
+    "sla": {
+      "deliveryTime": 22,
+      "lastMileTravel": 3,
+      "serviceability": "SERVICEABLE",
+      "slaString": "22 mins",
+      "lastMileTravelString": "3.0 km",
+      "iconType": "ICON_TYPE_EMPTY"
+    },
+    "cloudinaryImageId": "mghlzwgwfafedadkvuhm",
+    "offerLabel": "₹125 OFF"
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem, removeItem } from '../utils/store/slice/cartSlice';
+import constants from '../utils/constants';
 
 const MenuItemList = ({ items, isMenuPage }) => {
   const dispatch = useDispatch();
