@@ -19,7 +19,6 @@ class UserClass extends Component {
   async componentDidMount() {
     let data = await fetch(' https://api.github.com/users/aditya1819');
     data = await data.json();
-    console.log(data);
 
     // set state variable:
     this.setState({
@@ -27,7 +26,7 @@ class UserClass extends Component {
     });
 
     // Make API Call here :D
-    console.log('Child Component mounted');
+    // console.log('Child Component mounted');
   }
 
   componentDidUpdate() {
@@ -39,14 +38,13 @@ class UserClass extends Component {
   }
 
   render() {
-    console.log('Child Component render');
-
+    // console.log('Child Component render');
     const { name, location, avatar_url } = this.state.userInfo;
 
     return (
       <div>
-        <img src={avatar_url} className='w-40 mx-auto my-8'/>
-        <div className='text-xl my-8'>{name}</div>
+        <img src={avatar_url} className="w-40 mx-auto my-8" />
+        <div className="text-xl my-8">{name}</div>
         <h2>{location}</h2>
         <h2>{this.state.count}</h2>
       </div>

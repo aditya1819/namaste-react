@@ -17,7 +17,6 @@ const Menu = () => {
 
   const data = useContext(UserContext);
 
-  console.log(data.loggedInUser);
   if (hotelDetails === null) {
     return <ShimmerCard />;
   }
