@@ -11,6 +11,14 @@ import { Provider } from 'react-redux';
 import appStore from './utils/store/appStore';
 import Cart from './components/Cart';
 
+// Logic:
+// When app renders a index file is loaded in the client browser
+// that handles the application processing on server side
+// as application grows this index file can get big in size putting a load on the client resources
+// resulting in app getting bulky and slow
+// with help of lazy loading application is splitted into modules
+// these modules will be fetched in client browser when that component is loaded
+
 // Chunking | code spliting | Dynamic bundling | lazy loading | on demand loading
 
 // Lazy loading of grocery module(js) when that component is accessed
