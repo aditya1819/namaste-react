@@ -2,6 +2,7 @@ const jsonServer = require('json-server');
 const mock = require('../data/mockhotels.json');
 const { readFileSync } = require('fs');
 const path = require('path');
+const { isBooleanObject } = require('util/types');
 
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
@@ -10,32 +11,34 @@ const middlewares = jsonServer.defaults();
 server.get('/hotels', (req, res) => {
   console.log('json-server :: /hotels');
 
-  const data =
-    // Introduce a delay using setTimeout
-    setTimeout(() => {
-      console.log('json-server :: 2s Timeout completed');
-      res.json(
-        mock.map((item) => {
-          return {
-            info: {
-              id: item.info.id,
-              name: item.info.name,
-              avgRating: item.info.avgRating,
-              cuisines: item.info.cuisines,
-              sla: item.info.sla,
-              cloudinaryImageId: item.info.cloudinaryImageId
-            }
-          };
-        })
-      );
-    }, 2000);
+  // Introduce a delay using setTimeout
+  setTimeout(() => {
+    console.log('json-server :: 2s Timeout completed');
+    res.json(
+      mock.map((item) => {
+        return {
+          info: {
+            id: item.info.id,
+            name: item.info.name,
+            avgRating: item.info.avgRating,
+            cuisines: item.info.cuisines,
+            sla: item.info.sla,
+            cloudinaryImageId: item.info.cloudinaryImageId,
+            offerLabel: item.info.aggregatedDiscountInfoV3.header ?? ''
+          }
+        };
+      })
+    );
+  }, 2000);
 });
 
 server.get('/hotel/:id', async (req, res) => {
   const id = req.params.id;
 
+  const sortByCategory = req.query.sortByCategory ?? false;
+
   console.log(`Fetching data for hotel: ${id}`);
-  
+
   let _path = __dirname.split('\\').slice(0, 4);
   _path = path.join(..._path, 'data', 'hoteldata', id);
 

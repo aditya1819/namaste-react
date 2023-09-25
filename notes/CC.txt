@@ -25,3 +25,7 @@ Eg. If a parent component calls a 2 child component then the lifecycle flow will
 - Parent component did mount
 
 Ref. diagrams of component lifecycle
+
+## Context
+
+- Read context using Context.Consumer method

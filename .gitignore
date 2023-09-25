@@ -17,3 +17,5 @@ sketch
 .vscode
 .parcel-cache
 dist
+
+coverage/

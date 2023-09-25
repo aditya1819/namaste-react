@@ -4,3 +4,5 @@ Hooks:
   - useState()
   - useEffect()
 - Whenever a state value changes, react rerenders the component
+
+- to read context use useContext() hook

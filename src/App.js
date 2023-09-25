@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import Body from './components/Body';
@@ -6,6 +6,18 @@ import About from './components/About';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Error from './components/Error';
 import Menu from './components/Menu';
+import UserContext from './utils/context/User';
+import { Provider } from 'react-redux';
+import appStore from './utils/store/appStore';
+import Cart from './components/Cart';
+
+// Logic:
+// When app renders a index file is loaded in the client browser
+// that handles the application processing on server side
+// as application grows this index file can get big in size putting a load on the client resources
+// resulting in app getting bulky and slow
+// with help of lazy loading application is splitted into modules
+// these modules will be fetched in client browser when that component is loaded
 
 // Chunking | code spliting | Dynamic bundling | lazy loading | on demand loading
 
@@ -22,13 +34,32 @@ const Grocery = lazy(() => import('./components/Grocery'));
 // these modules will be fetched in client browser when that component is loaded
 
 const AppLayout = () => {
-  return (
-    <div className="AppLayout">
-      <Header />
+  const [userInfo, setUserInfo] = useState();
 
-      {/* while rendering the component corresponding to route will overrider the outlet in HTML */}
-      <Outlet />
-    </div>
+  useEffect(() => {
+    // make API call to fetch user data
+
+    const data = {
+      name: 'aditya shahare'
+    };
+
+    setUserInfo(data.name);
+  }, []);
+
+  return (
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: 'Dummy Name' }}>
+        <div className="AppLayout">
+          <Header />
+
+          {/* different context data for different components */}
+          <UserContext.Provider value={{ loggedInUser: userInfo, setUserInfo }}>
+            {/* while rendering the component corresponding to route will overrider the outlet in HTML */}
+            <Outlet />
+          </UserContext.Provider>
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -52,7 +83,8 @@ const appRouter = createBrowserRouter([
           </Suspense>
         )
       },
-      { path: '/hotels/:id', element: <Menu /> }
+      { path: '/hotels/:id', element: <Menu /> },
+      { path: '/cart', element: <Cart /> },
     ]
   }
 ]);

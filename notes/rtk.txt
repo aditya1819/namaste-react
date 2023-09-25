@@ -1,0 +1,6 @@
+- npm i @reduxjs/toolkit react-redux
+- build store
+- connect store to app
+- create a cart slice in the store
+- dispatch action logic
+- read using selector
